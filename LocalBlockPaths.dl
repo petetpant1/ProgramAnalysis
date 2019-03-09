@@ -1,0 +1,25 @@
+.decl LocalBlockPath(src:Block, target:Block)
+.output LocalBlockPath
+
+LocalBlockPath(src, target) :- LocalBlockEdge(src, target).
+
+LocalBlockPath(src, target) :-
+  LocalBlockPath(src, temp),
+  LocalBlockEdge(temp, target).
+
+//transitive closure
+
+
+//bad solution
+//LocalBlockPath(src, target) :-
+// LocalBlocPath(src, target),
+// LocalBlockPath(temp, target).
+
+
+.decl InSameSCC(b1:Block, b2:Block)
+.output InSameSCC
+
+InSameSCC(b1, b2) :-
+  LocalBlockPath(b1, b2),
+  LocalBlockPath(b2,b1).
+
